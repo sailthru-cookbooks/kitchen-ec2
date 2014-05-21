@@ -109,6 +109,11 @@ module Kitchen
       private
 
       def connection
+        if config[:use_iam_profile] == true
+          config[:aws_access_key_id] = nil
+          config[:aws_secret_access_key] = nil
+        end
+
         Fog::Compute.new(
           :provider               => :aws,
           :aws_access_key_id      => config[:aws_access_key_id],
