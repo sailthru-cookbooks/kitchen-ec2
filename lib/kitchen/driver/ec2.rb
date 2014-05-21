@@ -61,9 +61,13 @@ module Kitchen
 
       default_config :interface, nil
       default_config :associate_public_ip, false
+      default_config :use_iam_profile, false
 
-      required_config :aws_access_key_id
-      required_config :aws_secret_access_key
+      unless config[:use_iam_profile]
+        required_config :aws_access_key_id
+        required_config :aws_secret_access_key
+      end
+
       required_config :aws_ssh_key_id
       required_config :image_id
 
@@ -112,6 +116,7 @@ module Kitchen
           :aws_session_token      => config[:aws_session_token],
           :region                 => config[:region],
           :endpoint               => config[:endpoint],
+          :use_iam_profile        => config[:use_iam_profile],
         )
       end
 
@@ -144,6 +149,7 @@ module Kitchen
         debug("ec2:subnet_id '#{config[:subnet_id]}'")
         debug("ec2:iam_profile_name '#{config[:iam_profile_name]}'")
         debug("ec2:associate_public_ip '#{config[:associate_public_ip]}'")
+        debug("ec2:use_iam_profile '#{config[:use_iam_profile]}'")
       end
 
       def amis
