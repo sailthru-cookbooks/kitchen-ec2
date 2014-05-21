@@ -177,6 +177,13 @@ The EC2 IAM profile name to use.
 
 The default is `nil`.
 
+### <a name="config-associate-public-ip"></a> associate\_public\_ip
+
+This flag will associate a public IP to an instance created in a public subnet
+in a non-default VPC.
+
+The default is `false`.
+
 ## <a name="example"></a> Example
 
 The following could be used in a `.kitchen.yml` or in a `.kitchen.local.yml`
