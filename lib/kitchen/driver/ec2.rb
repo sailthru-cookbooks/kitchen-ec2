@@ -63,11 +63,8 @@ module Kitchen
       default_config :associate_public_ip, false
       default_config :use_iam_profile, false
 
-      #unless config[:use_iam_profile]
-      #required_config :aws_access_key_id
-      #required_config :aws_secret_access_key
-      #end
-
+      required_config :aws_access_key_id
+      required_config :aws_secret_access_key
       required_config :aws_ssh_key_id
       required_config :image_id
 
@@ -109,11 +106,6 @@ module Kitchen
       private
 
       def connection
-        if config[:use_iam_profile] == true
-          config[:aws_access_key_id] = nil
-          config[:aws_secret_access_key] = nil
-        end
-
         Fog::Compute.new(
           :provider               => :aws,
           :aws_access_key_id      => config[:aws_access_key_id],
